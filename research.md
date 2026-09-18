@@ -1,4 +1,4 @@
-# research.md｜碎片事务提醒工具（暂名）
+# research.md｜今日待办
 
 > Day 3 产出（2026-09-18）。作者：Charlie-xylz。  
 > 本文档是需求研究的结论，Day 4 的 PRD 将直接基于它撰写。  
