@@ -3,6 +3,3 @@
 
 # WorkBuddy 本地工具数据（项目笔记等），不进入代码仓库
 .workbuddy/
-
-# 项目协作规则（仅本地使用，不公开到 GitHub）
-AGENTS.md
