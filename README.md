@@ -5,8 +5,8 @@
 > ⚠️ **路线变更（2026-09-23 决定）**：本项目由 Web 版改为 **Flutter 安卓 App**，完全替换旧 Web 版。
 > 下面的「怎么运行」起针对新路线；旧 Web 版见文末「历史」一节。
 >
-> **当前状态**：环境搭建已完成（Flutter 3.47.5 + Android SDK 36.0.0 + Android Studio 2026.1.4，`flutter doctor` 关键两项已通过）。
-> **Flutter 工程骨架尚未创建**——所以下面「怎么运行」里的命令现在还跑不通，等工程建好即可用。
+> **当前状态**：阶段 1（环境搭建）与阶段 2（工程骨架 + 模拟器跑通）均已完成——Flutter 3.47.5 + Android SDK 36.0.0 + Android Studio 2026.1.4，工程位于 `D:\dev\today_todo`，**已能在模拟器上构建、安装、运行，并实测热重载 351 ms**。
+> 下一步是阶段 3：用「今日待办」的实际功能替换工程里的官方示例代码（F1–F4）。
 
 ## 为什么做这个
 
@@ -48,26 +48,32 @@ flutter run          # 编译并安装到手机上
 | `R` | 热重启：重新加载整个 App，状态清空 |
 | `q` | 退出 |
 
-### 真机调试
+### 调试设备
+
+**模拟器（当前使用）**——本机已建好 AVD `today_todo_api36`（Android 16 / API 36 / x86_64 / 1080×2400 @ 420 dpi = **411 dp**，落在 PRD AC-19 要求的 360–430 dp 区间内）：
+
+- 双击 `D:\dev\start_emulator.bat` 启动（冷启动约 24 秒进系统）
+- `flutter devices` 应能列出 `emulator-5554`
+- PRD AC-19 / AC-20 的验收环境本期即为模拟器，真机复核留到后期
+
+**真机（可选）**：
 
 1. 手机上开启「开发者选项」→ 打开「USB 调试」
 2. USB 线连到电脑，手机上弹出「允许 USB 调试吗」时点允许
 3. `flutter devices` 应能列出你的手机型号
 
-> 本机没有建安卓模拟器：8 GB 内存跑模拟器会明显卡顿，而且要额外下载 1–2 GB 系统镜像，所以调试以真机为准。
-
 ## 项目文件
 
 | 文件 | 说明 |
 | --- | --- |
-| `lib/` | Flutter 源码目录（**尚未创建**，随工程骨架生成） |
-| `pubspec.yaml` | Flutter 工程声明与依赖（**尚未创建**） |
-| `android/` | 安卓平台工程配置（**尚未创建**） |
+| `lib/main.dart` | Flutter 源码（现为官方示例，阶段 3 将替换为「今日待办」功能） |
+| `pubspec.yaml` | Flutter 工程声明与依赖（当前仅 `cupertino_icons`，后续加 sqflite / 通知库） |
+| `android/` | 安卓平台工程配置（包名 `com.xingho.today_todo`） |
 | `PRD.md` | 产品需求文档：做什么、怎么算做到（含 21 条验收标准） |
 | `TECH_DESIGN.md` | 技术设计：选什么技术、数据怎么流转 |
 | `research.md` | 竞品调研：为什么这么设计 |
 | `AGENTS.md` | 与 AI 协作的规则 |
-| `index.html` / `styles.css` / `app.js` | **旧 Web 版，已退役**（见文末「历史」） |
+| `index.html` / `styles.css` / `app.js` | **旧 Web 版，保留作参照**（待 Flutter 版跑通 F1 + F3 后删除，见文末「历史」） |
 
 > 注意：**Flutter 工程不在本仓库内**，它在 `D:\dev\today_todo`；本仓库（含空格路径）作为文档与旧版代码的存放处。
 
@@ -84,7 +90,8 @@ flutter run          # 编译并安装到手机上
 Flutter 版从零开始写（旧 Web 版的 F1 / F3 不迁移到新工程，见文末「历史」）：
 
 - [x] 阶段 1 环境搭建（Flutter SDK / Android SDK / Android Studio，`flutter doctor` 关键两项通过）
-- [ ] 阶段 2 创建工程骨架，真机上跑通空壳
+- [x] 阶段 2 创建工程骨架，在模拟器上跑通空壳（`flutter run` + 热重载实测 351 ms）
+- [ ] 阶段 3 用实际功能替换工程里的官方示例代码
 - [ ] F1 打开即看清要做的事
 - [ ] F2 每天固定 1–2 次的清单提醒
 - [ ] F3 事项的新增 / 编辑 / 完成 / 删除
